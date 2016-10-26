@@ -2,6 +2,28 @@ import java.util.*;
 import java.io.*;
 
 public class MaxPairwiseProduct {
+
+    static long getMaxPairwiseProductFast(long[] numbers){
+        int n = numbers.length;
+        int indexMax1 = -1;
+        int indexMax2 = -1;
+
+        for(int i = 0; i < n; ++i){
+            if(indexMax1 == -1 || numbers[i] > numbers[indexMax1]){
+                indexMax1 = i;
+            }
+        }
+
+        for(int i = 0; i < n; ++i){
+            if(i != indexMax1 && (indexMax2 == -1 || numbers[i] > numbers[indexMax2])){
+                indexMax2 = i;
+            }
+        }
+
+        return numbers[indexMax1] * numbers[indexMax2];
+    }
+
+
     static long getMaxPairwiseProduct(long[] numbers) {
         long result = 0;
         long n = numbers.length;
@@ -22,7 +44,7 @@ public class MaxPairwiseProduct {
         for (int i = 0; i < n; i++) {
             numbers[i] = scanner.nextLong();
         }
-        System.out.println(getMaxPairwiseProduct(numbers));
+        System.out.println(getMaxPairwiseProductFast(numbers));
     }
 
     static class FastScanner {
